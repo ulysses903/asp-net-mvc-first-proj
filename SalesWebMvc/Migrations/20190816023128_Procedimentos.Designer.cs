@@ -2,39 +2,22 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SalesWebMvc.Models;
 
 namespace SalesWebMvc.Migrations
 {
     [DbContext(typeof(SalesWebMvcContext))]
-    partial class SalesWebMvcContextModelSnapshot : ModelSnapshot
+    [Migration("20190816023128_Procedimentos")]
+    partial class Procedimentos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
-
-            modelBuilder.Entity("SalesWebMvc.Models.Cliente", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("BirthDate");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(60);
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired();
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Cliente");
-                });
 
             modelBuilder.Entity("SalesWebMvc.Models.Departament", b =>
                 {
@@ -46,26 +29,6 @@ namespace SalesWebMvc.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Departament");
-                });
-
-            modelBuilder.Entity("SalesWebMvc.Models.HistoricoDeVendas", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int?>("ClienteId");
-
-                    b.Property<double>("Price");
-
-                    b.Property<int?>("ProcedimentoId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ClienteId");
-
-                    b.HasIndex("ProcedimentoId");
-
-                    b.ToTable("HistoricoDeVendas");
                 });
 
             modelBuilder.Entity("SalesWebMvc.Models.Procedimentos", b =>
@@ -123,17 +86,6 @@ namespace SalesWebMvc.Migrations
                     b.HasIndex("DepartamentId");
 
                     b.ToTable("Seller");
-                });
-
-            modelBuilder.Entity("SalesWebMvc.Models.HistoricoDeVendas", b =>
-                {
-                    b.HasOne("SalesWebMvc.Models.Cliente")
-                        .WithMany("Venda")
-                        .HasForeignKey("ClienteId");
-
-                    b.HasOne("SalesWebMvc.Models.Procedimentos", "Procedimento")
-                        .WithMany()
-                        .HasForeignKey("ProcedimentoId");
                 });
 
             modelBuilder.Entity("SalesWebMvc.Models.SalesRecord", b =>
